@@ -1,7 +1,7 @@
 import { create } from "zustand"
 import type { UserWithStatus, UserStatus } from "../types/types"
 
-const generateAvatar = (id: number) => 
+const generateAvatar = (id: number) =>
   `https://api.dicebear.com/7.x/avataaars/svg?seed=${id}`
 
 interface UserStore {

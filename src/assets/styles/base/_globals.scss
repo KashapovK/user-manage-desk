@@ -1,0 +1,50 @@
+@use '../helpers' as *;
+
+body {
+  @include fluid-text(18, 16);
+
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-family-base);
+  color: var(--color-1);
+  background-color: var(--color-4);
+}
+
+main {
+  flex: 1
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3 {
+  font-family: var(--font-family-base);
+  font-weight: 600;
+  color: var(--color-1);
+}
+
+h1, .h1,
+h2, .h2 {
+  @include fluid-text(24, 24);
+}
+
+h3,
+.h3 {
+  @include fluid-text(20, 18);
+  color: var(--color-accent);
+}
+
+a,
+button,
+label,
+input,
+textarea,
+select,
+svg * {
+  transition-duration: var(--transition-duration);
+}
+
+:focus-visible {
+  outline: rem(2) dashed var(--color-accent);
+  outline-offset: rem(4);
+  transition-duration: 0s !important;
+}

@@ -1,9 +1,8 @@
-import { ArrowLeft } from "lucide-react"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router"
 import { EditUserForm } from "../components/edit-user-form"
-import { Button } from "../components/ui/button"
 import { useUserStore } from "../store/store"
+import RequestSuspense from "../components/request-suspense"
 
 export default function EditPage() {
   const params = useParams()
@@ -19,37 +18,45 @@ export default function EditPage() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-foreground mb-4">Пользователь не найден</h1>
-          <Button onClick={() => navigate("/")} className="gap-2">
-            <ArrowLeft className="w-4 h-4" />
-            Вернуться назад
-          </Button>
+      <div className="page page--centered">
+        <div className="page__content">
+          <h1 className="page__title">Пользователь не найден</h1>
+
+          <button
+            className="button button--primary"
+            onClick={() => navigate("/")}
+          >
+            <span className="button__text">Вернуться назад</span>
+          </button>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8 max-w-3xl">
-        <Button
-          variant="ghost"
-          onClick={() => navigate("/")}
-          className="mb-6 gap-2 text-muted-foreground hover:text-foreground"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Назад к списку
-        </Button>
+    <RequestSuspense pending={!user}>
+      <div className="page page--edit">
+        <div className="page__header">
+          <button
+            className="button button--ghost"
+            onClick={() => navigate("/")}
+          >
+            <img
+              src={"../assets/icons/Backarrow.svg"}
+              alt="назад"
+              className="button__icon"
+              height={28}
+              width={28}
+            />
+            <span className="button__text">Назад</span>
+          </button>
+          <div className="123">
+            <h3 className="234">Данные профиля</h3>
+          </div>
 
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-foreground mb-2">Редактирование пользователя</h1>
-          <p className="text-muted-foreground">Обновите информацию о пользователе</p>
+          <EditUserForm user={user} />
         </div>
-
-        <EditUserForm user={user} />
       </div>
-    </div>
+    </RequestSuspense>
   )
 }

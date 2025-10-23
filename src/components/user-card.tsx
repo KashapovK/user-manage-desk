@@ -1,9 +1,7 @@
-import { Edit, Archive, EyeOff, ArchiveRestore } from "lucide-react"
+import { useState } from "react"
 import { useNavigate } from "react-router"
 import { useUserStore } from "../store/store"
 import type { UserWithStatus } from "../types/types"
-import { Button } from "./ui/button"
-import { Card } from "./ui/card"
 
 interface UserCardProps {
   user: UserWithStatus
@@ -12,89 +10,88 @@ interface UserCardProps {
 export function UserCard({ user }: UserCardProps) {
   const navigate = useNavigate()
   const updateUserStatus = useUserStore((state) => state.updateUserStatus)
+  const [dropdownOpen, setDropdownOpen] = useState(false)
 
   const handleEdit = () => {
     navigate(`/edit/${user.id}`)
+    setDropdownOpen(false)
   }
 
   const handleArchive = () => {
     updateUserStatus(user.id, "archived")
+    setDropdownOpen(false)
   }
 
   const handleUnarchive = () => {
     updateUserStatus(user.id, "active")
+    setDropdownOpen(false)
   }
 
   const handleHide = () => {
     updateUserStatus(user.id, "hidden")
+    setDropdownOpen(false)
   }
 
   return (
-    <Card className="p-6 flex flex-col gap-4 bg-card border-border hover:shadow-lg transition-shadow">
-      <div className="flex items-center gap-4">
-        <div className="w-16 h-16 rounded-full overflow-hidden bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground text-xl font-semibold shrink-0">
+    <div className="user-card">
+      <div className="user-card__header">
+        <div className="user-card__avatar">
           {user.avatar ? (
             <img
               src={user.avatar}
               alt={user.name}
-              className="w-full h-full object-cover"
+              width={112}
+              height={120}
+              className="user-card__avatar-img"
             />
           ) : (
-            user.username.slice(0, 2).toUpperCase()
+            <span className="user-card__avatar-text">
+              {user.username.slice(0, 2).toUpperCase()}
+            </span>
           )}
         </div>
 
-        <div className="flex-1 min-w-0">
-          <h3 className="font-semibold text-lg text-card-foreground truncate">{user.username}</h3>
-          <p className="text-sm text-muted-foreground truncate">{user.address.city}</p>
-          <p className="text-sm text-muted-foreground truncate">{user.company.name}</p>
+        <div className="user-card__info">
+          <h3 className="user-card__username">{user.username}</h3>
+          <p className="user-card__city">{user.address.city}</p>
+          <p className="user-card__company">{user.company.name}</p>
         </div>
-      </div>
 
-      <div className="flex gap-2 pt-2 border-t border-border">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={handleEdit}
-          className="flex-1 gap-2 bg-transparent"
+        <button
+          className="user-card__dropdown-toggle"
+          onClick={() => setDropdownOpen(!dropdownOpen)}
         >
-          <Edit className="w-4 h-4" />
-          Редактировать
-        </Button>
-
-        {user.status === "active" ? (
-          <>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleArchive}
-              className="gap-2 bg-transparent"
-            >
-              <Archive className="w-4 h-4" />
-              Архив
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleHide}
-              className="gap-2 bg-transparent"
-            >
-              <EyeOff className="w-4 h-4" />
-              Скрыть
-            </Button>
-          </>
-        ) : user.status === "archived" ? (
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={handleUnarchive}
-            className="gap-2 bg-transparent"
-          >
-            <ArchiveRestore className="w-4 h-4" />
-            Активировать
-          </Button>
-        ) : null}
+          <img
+            src="src/assets/icons/Dropdown.svg"
+            alt="Меню"
+            width={24}
+            height={24}
+          />
+        </button>
       </div>
-    </Card>
+
+      {dropdownOpen && (
+        <div className="user-card__dropdown">
+          <button className="user-card__dropdown-item" onClick={handleEdit}>
+            Редактировать
+          </button>
+
+          {user.status === "active" ? (
+            <>
+              <button className="user-card__dropdown-item" onClick={handleArchive}>
+                Архивировать
+              </button>
+              <button className="user-card__dropdown-item" onClick={handleHide}>
+                Скрыть
+              </button>
+            </>
+          ) : user.status === "archived" ? (
+            <button className="user-card__dropdown-item" onClick={handleUnarchive}>
+              Активировать
+            </button>
+          ) : null}
+        </div>
+      )}
+    </div>
   )
 }

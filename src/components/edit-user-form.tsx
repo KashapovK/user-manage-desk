@@ -1,21 +1,18 @@
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
-import { useParams, useNavigate } from "react-router"
-import { Save } from "lucide-react"
+import { useNavigate } from "react-router"
+import { useState, useEffect } from "react"
 import { useUserStore } from "../store/store"
 import type { UserWithStatus } from "../types/types"
-import { Button } from "./ui/button"
-import { Card } from "./ui/card"
-import { Input } from "./ui/input"
 
 const userSchema = z.object({
-  name: z.string().min(1, "Имя обязательно"),
-  username: z.string().min(1, "Имя пользователя обязательно"),
-  email: z.string().email("Некорректный email"),
-  city: z.string().min(1, "Город обязателен"),
-  phone: z.string().min(1, "Телефон обязателен"),
-  companyName: z.string().min(1, "Название компании обязательно"),
+  name: z.string().min(2, "Имя должно быть от 2 до 64 символов").max(64),
+  username: z.string().min(2, "Никнейм должен быть от 2 до 64 символов").max(64),
+  email: z.email("Некорректный email"),
+  city: z.string().min(2, "Город должен быть от 2 до 64 символов").max(64),
+  phone: z.string().regex(/^\d+$/, "Телефон должен содержать только цифры"),
+  companyName: z.string().min(2, "Название компании должно быть от 2 до 64 символов").max(64),
 })
 
 type UserFormData = z.infer<typeof userSchema>
@@ -25,15 +22,11 @@ interface EditUserFormProps {
 }
 
 export function EditUserForm({ user }: EditUserFormProps) {
-  useParams<{ id: string} >()
   const navigate = useNavigate()
   const updateUser = useUserStore((state) => state.updateUser)
+  const [showSuccess, setShowSuccess] = useState(false)
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<UserFormData>({
+  const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<UserFormData>({
     resolver: zodResolver(userSchema),
     defaultValues: {
       name: user.name,
@@ -45,120 +38,149 @@ export function EditUserForm({ user }: EditUserFormProps) {
     },
   })
 
+  useEffect(() => {
+    reset({
+      name: user.name,
+      username: user.username,
+      email: user.email,
+      city: user.address.city,
+      phone: user.phone,
+      companyName: user.company.name,
+    })
+  }, [user, reset])
+
   const onSubmit = async (data: UserFormData) => {
-    // Simulate API delay
-    await new Promise((resolve) => setTimeout(resolve, 500))
+    // Симуляция задержки, для наглядности соотвествия тз
+    await new Promise((resolve) => setTimeout(resolve, 2000))
 
     updateUser(user.id, {
       name: data.name,
       username: data.username,
       email: data.email,
       phone: data.phone,
-      address: {
-        ...user.address,
-        city: data.city,
-      },
-      company: {
-        ...user.company,
-        name: data.companyName,
-      },
+      address: { ...user.address, city: data.city },
+      company: { ...user.company, name: data.companyName },
     })
 
-    navigate("/?success=true")
+    setShowSuccess(true)
+    setTimeout(() => setShowSuccess(false), 4000)
   }
 
   return (
-    <Card className="p-6 bg-card border-border">
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        <div className="space-y-2">
-          <label htmlFor="name" className="text-sm font-medium text-card-foreground">
-            Полное имя
-          </label>
-          <Input
+    <div className="edit-user-form">
+      {showSuccess && (
+  <div
+    className="edit-user-form__popup"
+    onClick={() => setShowSuccess(false)}
+  >
+    <div
+      className="edit-user-form__popup-content"
+      onClick={(e) => e.stopPropagation()} // чтобы клик по контенту не закрывал окно
+    >
+      <span>Изменения успешно сохранены!</span>
+      <button
+        type="button"
+        className="edit-user-form__popup-close"
+        onClick={() => setShowSuccess(false)}
+      >
+        <img
+          src="src/assets/icons/Cross.svg"
+          alt="Закрыть"
+          width={24}
+          height={24}
+        />
+      </button>
+    </div>
+  </div>
+)}
+
+
+      <form onSubmit={handleSubmit(onSubmit)} className="edit-user-form__form">
+        <div className="edit-user-form__group">
+          <label htmlFor="name" className="edit-user-form__label">Полное имя</label>
+          <input
             id="name"
             {...register("name")}
-            className="bg-background border-border text-foreground"
+            className="edit-user-form__input"
             placeholder="Введите полное имя"
           />
-          {errors.name && <p className="text-sm text-destructive">{errors.name.message}</p>}
+          {errors.name && <p className="edit-user-form__error">{errors.name.message}</p>}
         </div>
 
-        <div className="space-y-2">
-          <label htmlFor="username" className="text-sm font-medium text-card-foreground">
-            Имя пользователя
-          </label>
-          <Input
+        <div className="edit-user-form__group">
+          <label htmlFor="username" className="edit-user-form__label">Никнейм</label>
+          <input
             id="username"
             {...register("username")}
-            className="bg-background border-border text-foreground"
-            placeholder="Введите имя пользователя"
+            className="edit-user-form__input"
+            placeholder="Введите никнейм"
           />
-          {errors.username && <p className="text-sm text-destructive">{errors.username.message}</p>}
+          {errors.username && <p className="edit-user-form__error">{errors.username.message}</p>}
         </div>
 
-        <div className="space-y-2">
-          <label htmlFor="email" className="text-sm font-medium text-card-foreground">
-            Email
-          </label>
-          <Input
+        <div className="edit-user-form__group">
+          <label htmlFor="email" className="edit-user-form__label">Email</label>
+          <input
             id="email"
             type="email"
             {...register("email")}
-            className="bg-background border-border text-foreground"
+            className="edit-user-form__input"
             placeholder="Введите email"
           />
-          {errors.email && <p className="text-sm text-destructive">{errors.email.message}</p>}
+          {errors.email && <p className="edit-user-form__error">{errors.email.message}</p>}
         </div>
 
-        <div className="space-y-2">
-          <label htmlFor="city" className="text-sm font-medium text-card-foreground">
-            Город
-          </label>
-          <Input
+        <div className="edit-user-form__group">
+          <label htmlFor="city" className="edit-user-form__label">Город</label>
+          <input
             id="city"
             {...register("city")}
-            className="bg-background border-border text-foreground"
+            className="edit-user-form__input"
             placeholder="Введите город"
           />
-          {errors.city && <p className="text-sm text-destructive">{errors.city.message}</p>}
+          {errors.city && <p className="edit-user-form__error">{errors.city.message}</p>}
         </div>
 
-        <div className="space-y-2">
-          <label htmlFor="phone" className="text-sm font-medium text-card-foreground">
-            Телефон
-          </label>
-          <Input
+        <div className="edit-user-form__group">
+          <label htmlFor="phone" className="edit-user-form__label">Телефон</label>
+          <input
             id="phone"
             {...register("phone")}
-            className="bg-background border-border text-foreground"
+            className="edit-user-form__input"
             placeholder="Введите телефон"
           />
-          {errors.phone && <p className="text-sm text-destructive">{errors.phone.message}</p>}
+          {errors.phone && <p className="edit-user-form__error">{errors.phone.message}</p>}
         </div>
 
-        <div className="space-y-2">
-          <label htmlFor="companyName" className="text-sm font-medium text-card-foreground">
-            Компания
-          </label>
-          <Input
+        <div className="edit-user-form__group">
+          <label htmlFor="companyName" className="edit-user-form__label">Компания</label>
+          <input
             id="companyName"
             {...register("companyName")}
-            className="bg-background border-border text-foreground"
+            className="edit-user-form__input"
             placeholder="Введите название компании"
           />
-          {errors.companyName && <p className="text-sm text-destructive">{errors.companyName.message}</p>}
+          {errors.companyName && <p className="edit-user-form__error">{errors.companyName.message}</p>}
         </div>
 
-        <div className="flex gap-3 pt-4">
-          <Button type="submit" disabled={isSubmitting} className="flex-1 gap-2">
-            <Save className="w-4 h-4" />
+        <div className="edit-user-form__actions">
+          <button
+            type="submit"
+            className="edit-user-form__button edit-user-form__button--primary"
+            disabled={isSubmitting}
+          >
             {isSubmitting ? "Сохранение..." : "Сохранить изменения"}
-          </Button>
-          <Button type="button" variant="outline" onClick={() => navigate("/")} className="bg-transparent">
+          </button>
+
+          <button
+            type="button"
+            className="edit-user-form__button edit-user-form__button--outline"
+            onClick={() => navigate("/")}
+          >
             Отмена
-          </Button>
+          </button>
         </div>
       </form>
-    </Card>
+    </div>
   )
 }

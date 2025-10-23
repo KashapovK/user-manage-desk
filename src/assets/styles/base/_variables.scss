@@ -1,0 +1,30 @@
+@use '../helpers' as *;
+
+:root {
+  --color-1: #161616;
+  --color-2: #595959;
+  --color-3: #9C9C9C;
+  --color-4: #DADADA;
+  --color-5: #F4F4F4;
+  --color-6: #FDFDFD;
+  --color-accent: #22A0BC;
+
+  --font-family-base: 'Manrope', sans-serif;
+
+  --container-large-width: #{rem(1160)};
+  --container-width: #{rem(360)};
+  --container-height: #{rem(168)};
+  --container-padding-x: #{rem(16)};
+
+  --transition-duration: 0.2s;
+
+  --border: #{rem(1)} solid var(--color-4);
+
+  --100vw: calc(100vw - var(--scrollbar-width));
+
+  @include mobile {
+    --container-large-width: #{rem(343)};
+    --container-width: #{rem(162)};
+    --container-height: #{rem(242)};
+  }
+}

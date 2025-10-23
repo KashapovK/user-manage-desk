@@ -1,36 +1,36 @@
-import { useState } from "react"
-import { useNavigate } from "react-router"
-import { useUserStore } from "../store/store"
-import type { UserWithStatus } from "../types/types"
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
+import { useUserStore } from '../store/store';
+import type { UserWithStatus } from '../types/types';
 
 interface UserCardProps {
-  user: UserWithStatus
+  user: UserWithStatus;
 }
 
 export function UserCard({ user }: UserCardProps) {
-  const navigate = useNavigate()
-  const updateUserStatus = useUserStore((state) => state.updateUserStatus)
-  const [dropdownOpen, setDropdownOpen] = useState(false)
+  const navigate = useNavigate();
+  const updateUserStatus = useUserStore((state) => state.updateUserStatus);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handleEdit = () => {
-    navigate(`/edit/${user.id}`)
-    setDropdownOpen(false)
-  }
+    navigate(`/edit/${user.id}`);
+    setDropdownOpen(false);
+  };
 
   const handleArchive = () => {
-    updateUserStatus(user.id, "archived")
-    setDropdownOpen(false)
-  }
+    updateUserStatus(user.id, 'archived');
+    setDropdownOpen(false);
+  };
 
   const handleUnarchive = () => {
-    updateUserStatus(user.id, "active")
-    setDropdownOpen(false)
-  }
+    updateUserStatus(user.id, 'active');
+    setDropdownOpen(false);
+  };
 
   const handleHide = () => {
-    updateUserStatus(user.id, "hidden")
-    setDropdownOpen(false)
-  }
+    updateUserStatus(user.id, 'hidden');
+    setDropdownOpen(false);
+  };
 
   return (
     <div className="user-card">
@@ -76,22 +76,28 @@ export function UserCard({ user }: UserCardProps) {
             Редактировать
           </button>
 
-          {user.status === "active" ? (
+          {user.status === 'active' ? (
             <>
-              <button className="user-card__dropdown-item" onClick={handleArchive}>
+              <button
+                className="user-card__dropdown-item"
+                onClick={handleArchive}
+              >
                 Архивировать
               </button>
               <button className="user-card__dropdown-item" onClick={handleHide}>
                 Скрыть
               </button>
             </>
-          ) : user.status === "archived" ? (
-            <button className="user-card__dropdown-item" onClick={handleUnarchive}>
+          ) : user.status === 'archived' ? (
+            <button
+              className="user-card__dropdown-item"
+              onClick={handleUnarchive}
+            >
               Активировать
             </button>
           ) : null}
         </div>
       )}
     </div>
-  )
+  );
 }

@@ -6,6 +6,9 @@ interface RequestSuspenseProps {
   children: ReactNode;
 }
 
-export default function RequestSuspense({ pending, children }: RequestSuspenseProps) {
+export default function RequestSuspense({
+  pending,
+  children,
+}: RequestSuspenseProps) {
   return pending ? <Spinner /> : <>{children}</>;
 }

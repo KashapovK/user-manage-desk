@@ -1,20 +1,20 @@
-import { useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router"
-import { EditUserForm } from "../components/edit-user-form"
-import { useUserStore } from "../store/store"
-import RequestSuspense from "../components/request-suspense"
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router';
+import { EditUserForm } from '../components/edit-user-form';
+import { useUserStore } from '../store/store';
+import RequestSuspense from '../components/request-suspense';
 
 export default function EditPage() {
-  const params = useParams()
-  const navigate = useNavigate()
-  const userId = Number(params.id)
-  const getUserById = useUserStore((state) => state.getUserById)
-  const [user, setUser] = useState(getUserById(userId))
+  const params = useParams();
+  const navigate = useNavigate();
+  const userId = Number(params.id);
+  const getUserById = useUserStore((state) => state.getUserById);
+  const [user, setUser] = useState(getUserById(userId));
 
   useEffect(() => {
-    const foundUser = getUserById(userId)
-    setUser(foundUser)
-  }, [userId, getUserById])
+    const foundUser = getUserById(userId);
+    setUser(foundUser);
+  }, [userId, getUserById]);
 
   if (!user) {
     return (
@@ -24,13 +24,13 @@ export default function EditPage() {
 
           <button
             className="button button--primary"
-            onClick={() => navigate("/")}
+            onClick={() => navigate('/')}
           >
             <span className="button__text">Вернуться назад</span>
           </button>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -39,10 +39,10 @@ export default function EditPage() {
         <div className="page__header">
           <button
             className="button button--ghost"
-            onClick={() => navigate("/")}
+            onClick={() => navigate('/')}
           >
             <img
-              src={"../assets/icons/Backarrow.svg"}
+              src={'../assets/icons/Backarrow.svg'}
               alt="назад"
               className="button__icon"
               height={28}
@@ -58,5 +58,5 @@ export default function EditPage() {
         </div>
       </div>
     </RequestSuspense>
-  )
+  );
 }

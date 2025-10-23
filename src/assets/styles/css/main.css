@@ -151,7 +151,7 @@ button {
   (за исключением тех, у которых уже указан
   атрибут fill со значением 'none' или начинается с 'url')
  */
-:where([fill]:not([fill=none], [fill^=url])) {
+:where([fill]:not([fill='none'], [fill^='url'])) {
   fill: currentColor;
 }
 
@@ -160,7 +160,7 @@ button {
   (за исключением тех, у которых уже указан
   атрибут stroke со значением 'none')
  */
-:where([stroke]:not([stroke=none], [stroke^=url])) {
+:where([stroke]:not([stroke='none'], [stroke^='url'])) {
   stroke: currentColor;
 }
 
@@ -194,15 +194,15 @@ svg * {
   }
 }
 @font-face {
-  font-family: "Manrope";
-  src: url("../../fonts/Manrope-Medium.woff2") format("woff2");
+  font-family: 'Manrope';
+  src: url('../../fonts/Manrope-Medium.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Manrope";
-  src: url("../../fonts/Manrope-SemiBold.woff2") format("woff2");
+  font-family: 'Manrope';
+  src: url('../../fonts/Manrope-SemiBold.woff2') format('woff2');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -210,12 +210,12 @@ svg * {
 :root {
   --color-1: #161616;
   --color-2: #595959;
-  --color-3: #9C9C9C;
-  --color-4: #DADADA;
-  --color-5: #F4F4F4;
-  --color-6: #FDFDFD;
-  --color-accent: #22A0BC;
-  --font-family-base: "Manrope", sans-serif;
+  --color-3: #9c9c9c;
+  --color-4: #dadada;
+  --color-5: #f4f4f4;
+  --color-6: #fdfdfd;
+  --color-accent: #22a0bc;
+  --font-family-base: 'Manrope', sans-serif;
   --container-large-width: 72.5rem;
   --container-width: 22.5rem;
   --container-height: 10.5rem;
@@ -266,24 +266,27 @@ svg * {
 .full-vw-line {
   position: relative;
 }
-.full-vw-line::before, .full-vw-line::after {
+.full-vw-line::before,
+.full-vw-line::after {
   position: absolute;
   width: calc((var(--100vw) - var(--container-width)) / 2);
   height: 0.0625rem;
   background-color: var(--color-3);
 }
 .full-vw-line--top::before {
-  content: "";
+  content: '';
   bottom: 100%;
 }
 .full-vw-line--bottom::after {
-  content: "";
+  content: '';
   top: 100%;
 }
-.full-vw-line--left::before, .full-vw-line--left::after {
+.full-vw-line--left::before,
+.full-vw-line--left::after {
   right: 100%;
 }
-.full-vw-line--right::before, .full-vw-line--right::after {
+.full-vw-line--right::before,
+.full-vw-line--right::after {
   left: 100%;
 }
 
@@ -305,9 +308,10 @@ svg * {
   position: absolute;
   top: 50%;
   translate: 0 -50%;
-  content: "";
+  content: '';
   right: 0;
-  background: url("../../icons/arrow-top-right_black.svg") center no-repeat var(--color-accent);
+  background: url('../../icons/arrow-top-right_black.svg') center no-repeat
+    var(--color-accent);
   border-radius: 50%;
 }
 
@@ -324,16 +328,21 @@ main {
   flex: 1;
 }
 
-h1, .h1,
-h2, .h2,
-h3, .h3 {
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3 {
   font-family: var(--font-family-base);
   font-weight: 600;
   color: var(--color-1);
 }
 
-h1, .h1,
-h2, .h2 {
+h1,
+.h1,
+h2,
+.h2 {
   font-size: clamp(1.5rem, 1.5rem + 0vw, 1.5rem);
 }
 
@@ -382,7 +391,7 @@ svg * {
 }
 
 .spinner:after {
-  content: "";
+  content: '';
   display: block;
   width: 56px;
   height: 56px;
@@ -391,4 +400,4 @@ svg * {
   border: 4px solid;
   border-color: black transparent black transparent;
   animation: spin 1s linear infinite;
-}/*# sourceMappingURL=main.css.map */
+} /*# sourceMappingURL=main.css.map */

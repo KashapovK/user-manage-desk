@@ -1,15 +1,15 @@
-import { create } from "zustand"
-import type { UserWithStatus, UserStatus } from "../types/types"
+import { create } from 'zustand';
+import type { UserWithStatus, UserStatus } from '../types/types';
 
 const generateAvatar = (id: number) =>
-  `https://api.dicebear.com/7.x/avataaars/svg?seed=${id}`
+  `https://api.dicebear.com/7.x/avataaars/svg?seed=${id}`;
 
 interface UserStore {
-  users: UserWithStatus[]
-  setUsers: (users: UserWithStatus[]) => void
-  updateUserStatus: (userId: number, status: UserStatus) => void
-  updateUser: (userId: number, updates: Partial<UserWithStatus>) => void
-  getUserById: (userId: number) => UserWithStatus | undefined
+  users: UserWithStatus[];
+  setUsers: (users: UserWithStatus[]) => void;
+  updateUserStatus: (userId: number, status: UserStatus) => void;
+  updateUser: (userId: number, updates: Partial<UserWithStatus>) => void;
+  getUserById: (userId: number) => UserWithStatus | undefined;
 }
 
 export const useUserStore = create<UserStore>((set, get) => ({
@@ -26,7 +26,7 @@ export const useUserStore = create<UserStore>((set, get) => ({
   updateUserStatus: (userId, status) =>
     set((state) => ({
       users: state.users.map((user) =>
-        user.id === userId ? { ...user, status } : user
+        user.id === userId ? { ...user, status } : user,
       ),
     })),
 
@@ -39,9 +39,9 @@ export const useUserStore = create<UserStore>((set, get) => ({
               ...updates,
               avatar: updates.avatar ?? user.avatar ?? generateAvatar(user.id),
             }
-          : user
+          : user,
       ),
     })),
 
   getUserById: (userId) => get().users.find((user) => user.id === userId),
-}))
+}));

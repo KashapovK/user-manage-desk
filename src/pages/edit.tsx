@@ -5,7 +5,6 @@ import { EditUserForm } from '../components/edit-user-form';
 import { useUserStore } from '../store/store';
 import RequestSuspense from '../components/request-suspense';
 import Header from '../layout/header';
-import backarrowIcon from '../assets/icons/backarrow.svg';
 
 export default function EditPage() {
   const params = useParams();
@@ -51,7 +50,7 @@ export default function EditPage() {
                 aria-label="Назад"
               >
                 <img
-                  src={backarrowIcon}
+                  src="/icons/backarrow.svg"
                   alt=""
                   className="button__icon"
                   height={28}

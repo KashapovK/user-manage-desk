@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useUserStore } from '../store/store';
 import type { UserWithStatus } from '../types/types';
-import dropdownIcon from '../assets/icons/dropdown.svg';
 
 interface UserCardProps {
   user: UserWithStatus;
@@ -62,7 +61,7 @@ export function UserCard({ user }: UserCardProps) {
           className="user-card__dropdown-toggle"
           onClick={() => setDropdownOpen(!dropdownOpen)}
         >
-          <img src={dropdownIcon} alt="Меню" width={24} height={24} />
+          <img src="/icons/dropdown.svg" alt="Меню" width={24} height={24} />
         </button>
       </div>
 

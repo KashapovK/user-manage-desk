@@ -1,7 +1,4 @@
 import type { UserWithStatus } from '../types/types';
-import logo from '../assets/images/logo.svg';
-import notificationIcon from '../assets/icons/notification.svg';
-import favoriteIcon from '../assets/icons/favorite.svg';
 
 interface HeaderProps {
   user?: UserWithStatus;
@@ -14,7 +11,7 @@ export default function Header({ user }: HeaderProps) {
         <div className="header__logo">
           <img
             className="header__logo-image"
-            src={logo}
+            src="/icons/logo.svg"
             alt="Логотип"
             width={124}
             height={24}
@@ -32,7 +29,7 @@ export default function Header({ user }: HeaderProps) {
               data-action="notification"
             >
               <img
-                src={notificationIcon}
+                src="/icons/notification.svg"
                 alt="Уведомления"
                 width={24}
                 height={24}
@@ -45,7 +42,7 @@ export default function Header({ user }: HeaderProps) {
               data-action="favorite"
             >
               <img
-                src={favoriteIcon}
+                src="/icons/favorite.svg"
                 alt="Избранное"
                 width={24}
                 height={24}

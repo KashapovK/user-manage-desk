@@ -4,7 +4,6 @@ import * as z from 'zod';
 import { useState, useEffect } from 'react';
 import { useUserStore } from '../store/store';
 import type { UserWithStatus } from '../types/types';
-import crossIcon from '../assets/icons/cross.svg';
 
 const userSchema = z.object({
   name: z.string().min(2, 'Имя должно быть от 2 до 64 символов').max(64),
@@ -93,7 +92,12 @@ export function EditUserForm({ user }: EditUserFormProps) {
               className="edit-user-form__popup-close"
               onClick={() => setShowSuccess(false)}
             >
-              <img src={crossIcon} alt="Закрыть" width={24} height={24} />
+              <img
+                src="/icons/cross.svg"
+                alt="Закрыть"
+                width={24}
+                height={24}
+              />
             </button>
           </div>
         </div>

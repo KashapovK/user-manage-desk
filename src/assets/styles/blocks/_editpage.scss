@@ -1,0 +1,41 @@
+@use '../helpers' as *;
+
+.page {
+  &--centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+
+    .page__content {
+      text-align: center;
+    }
+
+    .page__title {
+      margin-bottom: 16px;
+    }
+  }
+
+  &__main {
+    width: 100%;
+    display: block;
+  }
+
+  &__container {
+    width: var(--container-large-width);
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  &__controls {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+  }
+}

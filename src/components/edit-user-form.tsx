@@ -1,10 +1,10 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { useNavigate } from 'react-router';
 import { useState, useEffect } from 'react';
 import { useUserStore } from '../store/store';
 import type { UserWithStatus } from '../types/types';
+import crossIcon from '../assets/icons/cross.svg';
 
 const userSchema = z.object({
   name: z.string().min(2, 'Имя должно быть от 2 до 64 символов').max(64),
@@ -28,7 +28,6 @@ interface EditUserFormProps {
 }
 
 export function EditUserForm({ user }: EditUserFormProps) {
-  const navigate = useNavigate();
   const updateUser = useUserStore((state) => state.updateUser);
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -62,7 +61,7 @@ export function EditUserForm({ user }: EditUserFormProps) {
 
   const onSubmit = async (data: UserFormData) => {
     // Симуляция задержки, для наглядности соотвествия тз
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 3000));
 
     updateUser(user.id, {
       name: data.name,
@@ -94,12 +93,7 @@ export function EditUserForm({ user }: EditUserFormProps) {
               className="edit-user-form__popup-close"
               onClick={() => setShowSuccess(false)}
             >
-              <img
-                src="src/assets/icons/Cross.svg"
-                alt="Закрыть"
-                width={24}
-                height={24}
-              />
+              <img src={crossIcon} alt="Закрыть" width={24} height={24} />
             </button>
           </div>
         </div>
@@ -108,7 +102,7 @@ export function EditUserForm({ user }: EditUserFormProps) {
       <form onSubmit={handleSubmit(onSubmit)} className="edit-user-form__form">
         <div className="edit-user-form__group">
           <label htmlFor="name" className="edit-user-form__label">
-            Полное имя
+            Имя
           </label>
           <input
             id="name"
@@ -138,7 +132,7 @@ export function EditUserForm({ user }: EditUserFormProps) {
 
         <div className="edit-user-form__group">
           <label htmlFor="email" className="edit-user-form__label">
-            Email
+            Почта
           </label>
           <input
             id="email"
@@ -184,7 +178,7 @@ export function EditUserForm({ user }: EditUserFormProps) {
 
         <div className="edit-user-form__group">
           <label htmlFor="companyName" className="edit-user-form__label">
-            Компания
+            Навзание компании
           </label>
           <input
             id="companyName"
@@ -205,15 +199,7 @@ export function EditUserForm({ user }: EditUserFormProps) {
             className="edit-user-form__button edit-user-form__button--primary"
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'Сохранение...' : 'Сохранить изменения'}
-          </button>
-
-          <button
-            type="button"
-            className="edit-user-form__button edit-user-form__button--outline"
-            onClick={() => navigate('/')}
-          >
-            Отмена
+            {isSubmitting ? 'Сохранение...' : 'Сохранить'}
           </button>
         </div>
       </form>

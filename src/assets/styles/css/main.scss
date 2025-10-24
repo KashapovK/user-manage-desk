@@ -4,4 +4,11 @@
 @use '../base/utils';
 @use '../base/globals';
 
+@use '../blocks/header';
+@use '../blocks/profile';
+@use '../blocks/icons';
+@use '../blocks/logo';
 @use '../blocks/spinner';
+@use '../blocks/user';
+@use '../blocks/editpage';
+@use '../blocks/homepage';

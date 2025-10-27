@@ -1,0 +1,23 @@
+@use '../helpers' as *;
+
+.user-card {
+  .user-card__username--archived {
+    color: var(--color-2);
+  }
+
+  .user-card__company--archived {
+    color: var(--color-3);
+  }
+
+  .user-card__city--archived {
+    color: var(--color-4);
+  }
+
+  .user-card__avatar--archived {
+    background: var(--color-3);
+  }
+
+  .user-card__avatar-img--archived {
+    filter: grayscale(100%) brightness(0.8);
+  }
+}

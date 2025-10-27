@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import Spinner from './spinner';
+import Spinner from '../ui/spinner';
 
 interface RequestSuspenseProps {
   pending: boolean;

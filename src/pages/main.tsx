@@ -1,74 +1,63 @@
-import { useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { fetchUsers } from '../services/api';
-import { useUserStore } from '../store/store';
-import { UserCard } from '../components/user-card';
-import RequestSuspense from '../components/request-suspense';
+import RequestSuspense from '../components/request-suspense/request-suspense';
 import Header from '../layout/header';
+import { useUsersData } from '../hooks/use-users-data';
+import { UsersSection } from '../components/user/users-section';
+import { EmptyState } from '../components/ui/empty-state';
 
 export default function MainPage() {
-  const { data: users, isLoading } = useQuery({
-    queryKey: ['users'],
-    queryFn: fetchUsers,
-  });
+  const { activeUsers, archivedUsers, isLoading, error } = useUsersData();
 
-  const { users: storeUsers, setUsers } = useUserStore();
+  const getStatusMessage = () => {
+    if (isLoading) return 'Загрузка пользователей...';
+    if (error) return 'Ошибка загрузки пользователей';
+    if (activeUsers.length === 0 && archivedUsers.length === 0)
+      return 'Нет пользователей для отображения';
+    return `Показано ${activeUsers.length} активных и ${archivedUsers.length} архивных пользователей`;
+  };
 
-  useEffect(() => {
-    if (users && storeUsers.length === 0) {
-      const usersWithStatus = users.slice(0, 6).map((user) => ({
-        ...user,
-        status: 'active' as const,
-      }));
-      setUsers(usersWithStatus);
-    }
-  }, [users, storeUsers.length, setUsers]);
-
-  const activeUsers = storeUsers.filter((u) => u.status === 'active');
-  const archivedUsers = storeUsers.filter((u) => u.status === 'archived');
+  const hasNoUsers =
+    activeUsers.length === 0 && archivedUsers.length === 0 && !isLoading;
 
   return (
     <>
-      <Header user={activeUsers[0]} />
+      <Header />
 
       <RequestSuspense pending={isLoading}>
-        <div className="home-page">
+        <main className="home-page" id="main-content">
           <div className="home-page__container">
             <h1 className="home-page__title visually-hidden">
               Управление пользователями
             </h1>
 
-            {activeUsers.length > 0 && (
-              <section className="user-section user-section--active">
-                <h2 className="user-section__title">Активные</h2>
-                <div className="user-section__grid">
-                  {activeUsers.map((user) => (
-                    <UserCard key={user.id} user={user} />
-                  ))}
-                </div>
-              </section>
-            )}
+            <div
+              aria-live="polite"
+              aria-atomic="true"
+              className="visually-hidden"
+            >
+              {getStatusMessage()}
+            </div>
 
-            {archivedUsers.length > 0 && (
-              <section className="user-section user-section--archived">
-                <h2 className="user-section__title">Архив</h2>
-                <div className="user-section__grid">
-                  {archivedUsers.map((user) => (
-                    <UserCard key={user.id} user={user} />
-                  ))}
-                </div>
-              </section>
-            )}
+            <UsersSection
+              title="Активные"
+              titleId="active-users-title"
+              users={activeUsers}
+              ariaLabel="Активные"
+              modifier="active"
+            />
 
-            {activeUsers.length === 0 && archivedUsers.length === 0 && (
-              <div className="home-page__empty">
-                <p className="home-page__empty-text">
-                  Нет пользователей для отображения
-                </p>
-              </div>
+            <UsersSection
+              title="Архив"
+              titleId="archived-users-title"
+              users={archivedUsers}
+              ariaLabel="Архивные пользователи"
+              modifier="archived"
+            />
+
+            {hasNoUsers && (
+              <EmptyState message="Нет пользователей для отображения" />
             )}
           </div>
-        </div>
+        </main>
       </RequestSuspense>
     </>
   );

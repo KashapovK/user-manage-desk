@@ -1,0 +1,17 @@
+@use '../helpers' as *;
+
+.home-page {
+  &__container {
+    width: 100%;
+    max-width: var(--container-large-width);
+    margin: 0 auto;
+  }
+
+  &__empty {
+    text-align: center;
+
+    &-text {
+      color: var(--color-2);
+    }
+  }
+}

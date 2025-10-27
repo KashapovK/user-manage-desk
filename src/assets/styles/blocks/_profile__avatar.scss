@@ -1,0 +1,24 @@
+@use '../helpers' as *;
+
+.profile {
+  &__avatar {
+    flex-shrink: 0;
+    width: rem(280);
+    height: rem(485);
+    border-radius: rem(8);
+    background: var(--color-4);
+    overflow: hidden;
+
+    @include mobile {
+      width: rem(287);
+      height: rem(187);
+    }
+
+    &-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+}

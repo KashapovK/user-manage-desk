@@ -5,6 +5,11 @@
   font-size: fluid($max, $min);
 }
 
+@mixin fluid-padding-x($max: 140, $min: 15) {
+  padding-left: fluid($max, $min);
+  padding-right: fluid($max, $min);
+}
+
 @mixin hide {
   opacity: 0;
   visibility: hidden;
@@ -23,6 +28,16 @@
   }
 
   justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-align-center($isInline: false) {
+  @if $isInline {
+    display: inline-flex;
+  } @else {
+    display: flex;
+  }
+
   align-items: center;
 }
 
@@ -61,25 +76,4 @@
   clip-path: inset(100%) !important;
   clip: rect(0 0 0 0) !important;
   overflow: hidden !important;
-}
-
-@mixin full-vw-centered-line(
-  $property: top,
-  $left: 50%,
-  $right: auto,
-  $translate: -50%
-) {
-  position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    left: $left;
-    right: $right;
-    #{$property}: 0;
-    translate: $translate;
-    width: var(--100vw);
-    height: rem(1);
-    background-color: var(--color-dark-15);
-  }
 }

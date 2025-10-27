@@ -28,3 +28,12 @@ export type UserStatus = 'active' | 'archived' | 'hidden';
 export interface UserWithStatus extends User {
   status: UserStatus;
 }
+
+export interface FormFieldProps {
+  id: string;
+  label: string;
+  placeholder?: string;
+  register: any;
+  error?: any;
+  type?: string;
+}

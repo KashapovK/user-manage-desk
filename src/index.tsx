@@ -5,6 +5,7 @@ import EditPage from './pages/edit';
 import MainPage from './pages/main';
 import { StrictMode } from 'react';
 import { AppProviders } from './services/providers';
+import './assets/styles/css/main.scss';
 
 const router = createBrowserRouter([
   {

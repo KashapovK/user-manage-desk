@@ -8,7 +8,7 @@
   --color-5: #f4f4f4;
   --color-6: #fdfdfd;
   --color-accent: #22a0bc;
-
+  --color-1-transaprent: rgb(22, 22, 22, 0.24);
   --font-family-base: 'Manrope', sans-serif;
 
   --container-large-width: #{rem(1160)};
@@ -16,7 +16,7 @@
   --container-height: #{rem(168)};
   --container-padding-x: #{rem(16)};
 
-  --transition-duration: 0.2s;
+  --transition: ease-out 0.3s;
 
   --border: #{rem(1)} solid var(--color-4);
 

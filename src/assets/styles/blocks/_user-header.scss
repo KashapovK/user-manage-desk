@@ -1,21 +1,18 @@
 @use '../helpers' as *;
 
 .header__user {
-  display: inline-flex;
-  align-items: center;
+  @include flex-align-center;
   gap: rem(8);
 
   &-avatar {
-    width: rem(20);
-    height: rem(20);
+    @include square(rem(20));
     border-radius: 50%;
     overflow: hidden;
     flex-shrink: 0;
     display: inline-block;
 
     @include mobile {
-      width: rem(24);
-      height: rem(24);
+      @include square(rem(24));
     }
 
     &-image {

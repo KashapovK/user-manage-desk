@@ -4,11 +4,22 @@
 @use '../base/utils';
 @use '../base/globals';
 
+@use '../blocks/back-button';
+@use '../blocks/edit-page';
+@use '../blocks/edit-user-form__button';
+@use '../blocks/edit-user-form__popup';
+@use '../blocks/edit-user-form';
 @use '../blocks/header';
-@use '../blocks/profile';
-@use '../blocks/icons';
+@use '../blocks/home-page__user-section';
+@use '../blocks/home-page';
 @use '../blocks/logo';
+@use '../blocks/profile__avatar';
+@use '../blocks/profile__sections';
+@use '../blocks/profile';
 @use '../blocks/spinner';
-@use '../blocks/user';
-@use '../blocks/editpage';
-@use '../blocks/homepage';
+@use '../blocks/user-card__avatar';
+@use '../blocks/user-card__dropdown';
+@use '../blocks/user-card__info';
+@use '../blocks/user-card--archived';
+@use '../blocks/user-card';
+@use '../blocks/user-header';

@@ -1,0 +1,29 @@
+@use '../helpers' as *;
+
+.user-section {
+  &__title {
+    margin-bottom: rem(28);
+    margin-top: rem(40);
+    border-bottom: var(--border);
+    padding-bottom: rem(16);
+
+    @include mobile {
+      margin-top: rem(32);
+      margin-bottom: rem(16);
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(var(--container-width), 1fr)
+    );
+    gap: rem(32) rem(40);
+
+    @include mobile {
+      grid-template-columns: repeat(2, 1fr);
+      gap: rem(16);
+    }
+  }
+}

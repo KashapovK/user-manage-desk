@@ -1,0 +1,41 @@
+.button {
+  @include flex-align-center;
+  gap: rem(8);
+  background: none;
+  border: none;
+  border-radius: rem(5);
+  padding-block: fluid(20, 11);
+
+  @include hover {
+    background-color: var(--color-5);
+  }
+
+  &:active {
+    background-color: var(--color-4);
+  }
+}
+
+.buttonText {
+  color: var(--color-2);
+  @include fluid-text(20, 16);
+}
+
+.desktopIcon {
+  @include square(rem(28));
+  display: block;
+  color: var(--color-2);
+
+  @include mediaMobile {
+    display: none;
+  }
+}
+
+.mobileIcon {
+  @include square(rem(28));
+  display: none;
+  color: var(--color-2);
+
+  @include mediaMobile {
+    display: block;
+  }
+}

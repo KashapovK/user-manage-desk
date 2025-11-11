@@ -1,0 +1,59 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-6);
+  border-radius: rem(16);
+  padding: fluid(40, 28);
+  gap: fluid(40, 24);
+  width: fluid(360, 320);
+
+  @include mediaMobile {
+    width: 100%;
+  }
+}
+
+.avatar {
+  aspect-ratio: 280/485;
+  border-radius: rem(8);
+  overflow: hidden;
+
+  @include mediaTablet {
+    aspect-ratio: 260/450;
+  }
+
+  @include mediaMobile {
+    width: rem(287);
+    height: rem(187);
+  }
+}
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sectionsList {
+  display: flex;
+  flex-direction: column;
+  gap: fluid(24, 20);
+}
+
+.sectionItem {
+  @include fluid-text(16, 14);
+  padding-bottom: fluid(12, 8);
+  border-bottom: var(--border);
+  color: var(--color-3);
+  transition: var(--transition);
+  cursor: pointer;
+  font-weight: 500;
+
+  @include hover {
+    color: var(--color-accent);
+  }
+}
+
+.sectionItemActive {
+  color: var(--color-1);
+  font-weight: 600;
+}

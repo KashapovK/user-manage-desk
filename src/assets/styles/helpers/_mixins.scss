@@ -5,21 +5,6 @@
   font-size: fluid($max, $min);
 }
 
-@mixin fluid-padding-x($max: 140, $min: 15) {
-  padding-left: fluid($max, $min);
-  padding-right: fluid($max, $min);
-}
-
-@mixin hide {
-  opacity: 0;
-  visibility: hidden;
-}
-
-@mixin show {
-  opacity: 1;
-  visibility: visible;
-}
-
 @mixin flex-center($isInline: false) {
   @if $isInline {
     display: inline-flex;
@@ -39,25 +24,6 @@
   }
 
   align-items: center;
-}
-
-@mixin abs-center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  translate: -50% -50%;
-}
-
-@mixin abs-x {
-  position: absolute;
-  left: 50%;
-  translate: -50%;
-}
-
-@mixin abs-y {
-  position: absolute;
-  top: 50%;
-  translate: 0 -50%;
 }
 
 @mixin square($size) {

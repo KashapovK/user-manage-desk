@@ -1,14 +1,11 @@
-import type { ReactNode } from 'react';
-import Spinner from '../ui/spinner';
+import Spinner from '@/components/ui/spinner/spinner';
+import { StatusMessage } from '@/components/ui/status-message/status-message';
 
-interface RequestSuspenseProps {
-  pending: boolean;
-  children: ReactNode;
-}
-
-export default function RequestSuspense({
-  pending,
-  children,
-}: RequestSuspenseProps) {
-  return pending ? <Spinner /> : <>{children}</>;
+export default function RequestSuspense() {
+  return (
+    <>
+      <StatusMessage type="loading" />
+      <Spinner />
+    </>
+  );
 }

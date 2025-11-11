@@ -1,0 +1,45 @@
+.popup {
+  @include flex-center;
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--color-1-transaprent);
+  z-index: var(--z-popup);
+}
+
+.popupContent {
+  @include flex-center;
+  flex-direction: column;
+  position: relative;
+  background-color: var(--color-6);
+  width: fluid(310, 271);
+  height: fluid(210, 189);
+  border-radius: rem(16);
+  color: var(--color-2);
+  gap: fluid(20, 16);
+  padding: fluid(40, 32);
+}
+
+.popupClose {
+  position: absolute;
+  top: rem(12);
+  right: rem(12);
+  background: none;
+  border: none;
+  @include square(rem(40));
+
+  @include hover;
+}
+
+.popupIcon {
+  @include square(rem(84));
+}
+
+.popupMessage {
+  @include fluid-text(20, 18);
+  text-align: center;
+  color: var(--color-2);
+  white-space: nowrap;
+  overflow: visible;
+}

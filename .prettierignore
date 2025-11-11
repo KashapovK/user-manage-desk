@@ -1,0 +1,9 @@
+# Игнорируем markdown файлы
+**/*.md
+*.md
+
+# Другие стандартные исключения
+dist/
+node_modules/
+coverage/
+*.log

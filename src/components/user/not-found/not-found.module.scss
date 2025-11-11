@@ -1,0 +1,19 @@
+.container {
+  @include flex-center;
+  min-height: 60vh;
+  padding: rem(40);
+}
+
+.content {
+  text-align: center;
+  max-width: rem(400);
+  width: 100%;
+}
+
+.title {
+  margin-bottom: rem(40);
+}
+
+.message {
+  margin-bottom: rem(32);
+}

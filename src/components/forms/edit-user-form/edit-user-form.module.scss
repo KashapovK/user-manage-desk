@@ -1,0 +1,26 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: fluid(24, 20);
+}
+
+.button {
+  @include flex-center;
+  @include fluid-text(16, 14);
+  border-radius: rem(50);
+  border: none;
+  padding: fluid(13, 14) fluid(40, 24);
+  min-width: fluid(170, 160);
+  background: var(--color-1);
+  color: var(--color-6);
+
+  @include hover {
+    color: var(--color-1);
+    background: var(--color-6);
+
+    @include mediaMobile {
+      width: 100%;
+      min-width: auto;
+    }
+  }
+}

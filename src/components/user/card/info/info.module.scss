@@ -1,0 +1,43 @@
+.cardGrid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  width: 100%;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.username {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: var(--color-accent);
+  @include fluid-text(20, 18);
+  margin-bottom: rem(4);
+}
+
+.company {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: var(--color-2);
+  @include fluid-text(16, 14);
+  font-weight: 500;
+}
+
+.city {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: var(--color-3);
+  font-weight: 500;
+  @include fluid-text(14, 10);
+  margin-top: auto;
+
+  @include mediaMobile {
+    font-weight: 600;
+  }
+}

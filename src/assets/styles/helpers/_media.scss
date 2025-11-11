@@ -1,15 +1,23 @@
 @use 'functions' as *;
 
-$mobile: 375.98;
+$laptop: 1192.98;
+$tablet: 768.98;
+$mobile: 425.98;
 
-@mixin mobile-above {
-  @media (width > rem($mobile)) {
+@mixin mediaLaptop {
+  @media (max-width: rem($laptop)) {
     @content;
   }
 }
 
-@mixin mobile {
-  @media (width <= rem($mobile)) {
+@mixin mediaTablet {
+  @media (max-width: rem($tablet)) {
+    @content;
+  }
+}
+
+@mixin mediaMobile {
+  @media (max-width: rem($mobile)) {
     @content;
   }
 }

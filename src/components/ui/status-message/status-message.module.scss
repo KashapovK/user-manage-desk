@@ -1,0 +1,19 @@
+.statusMessage {
+  padding: rem(16);
+  margin: rem(20) 0;
+  border-radius: rem(8);
+  text-align: center;
+}
+
+.loading {
+  color: var(--color-2);
+}
+
+.error {
+  color: red;
+  border: var(--border);
+}
+
+.empty {
+  color: var(--color-2);
+}

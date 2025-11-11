@@ -1,0 +1,59 @@
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: rem(10);
+}
+
+.inputWrapper {
+  position: relative;
+  @include flex-align-center;
+}
+
+.input {
+  width: 100%;
+  padding: rem(10) rem(40) rem(10) rem(16);
+  border: var(--border);
+  border-radius: rem(50);
+  background: var(--color-6);
+  transition: var(--transition);
+  color: var(--color-2);
+  font-weight: 500;
+  @include fluid-text(16, 14);
+
+  //обман автозаполнения браузера, опционально
+  //transition: all 5000s ease-in-out 0s;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::placeholder {
+    color: var(--color-4);
+  }
+}
+
+.inputChanged {
+  color: var(--color-1);
+}
+
+.clear {
+  @include flex-center;
+  position: absolute;
+  right: rem(9);
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--color-2);
+  transition: var(--transition);
+
+  @include hover;
+}
+
+.clearIcon {
+  @include square(rem(24));
+}
+
+.error {
+  margin-top: rem(4);
+  color: red;
+}

@@ -1,15 +1,66 @@
 <!doctype html>
 <html lang="ru">
   <head>
+    <meta charset="UTF-8" />
     <meta
       name="viewport"
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
     />
+
+    <!-- Preload критичных шрифтов -->
+    <link
+      rel="preload"
+      href="/src/assets/fonts/Manrope-Medium.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/src/assets/fonts/Manrope-SemiBold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Users Desk</title>
+
+    <meta
+      name="description"
+      content="Users Desk - современная система управления пользователями с удобным интерфейсом"
+    />
+    <meta
+      name="keywords"
+      content="пользователи, управление, админка, users, React, TypeScript"
+    />
+    <meta name="author" content="Users Desk" />
+
+    <!-- Open Graph / Social Media -->
+    <meta
+      property="og:title"
+      content="Users Desk - Управление пользователями"
+    />
+    <meta
+      property="og:description"
+      content="Современная система для эффективного управления пользователями"
+    />
+    <meta property="og:type" content="website" />
+
+    <!-- Theme Color для мобильных браузеров -->
+    <meta name="theme-color" content="#2563eb" />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/index.tsx"></script>
+
+    <!-- Noscript для пользователей без JavaScript -->
+    <noscript>
+      <h2>Для работы приложения требуется JavaScript</h2>
+      <p>
+        Пожалуйста, включите JavaScript в настройках вашего браузера и
+        перезагрузите страницу.
+      </p>
+    </noscript>
   </body>
 </html>

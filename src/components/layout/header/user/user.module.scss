@@ -1,0 +1,28 @@
+.user {
+  @include flex-align-center;
+  gap: rem(8);
+}
+
+.userAvatar {
+  @include square(fluid(20, 24));
+  border-radius: 50%;
+}
+
+.userAvatarPlaceholder {
+  @include flex-center;
+  @include square(fluid(20, 24));
+  @include fluid-text(13, 10);
+  border-radius: 50%;
+}
+
+.userName {
+  @include fluid-text(16, 15);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: fluid(140, 120);
+
+  @include mediaMobile {
+    display: none;
+  }
+}

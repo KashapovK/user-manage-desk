@@ -1,28 +1,9 @@
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router';
-import App from './app/app';
-import EditPage from './pages/edit';
-import MainPage from './pages/main';
+import { RouterProvider } from 'react-router';
 import { StrictMode } from 'react';
 import { AppProviders } from './services/providers';
-import './assets/styles/css/main.scss';
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-    children: [
-      {
-        index: true,
-        element: <MainPage />,
-      },
-      {
-        path: 'edit/:id',
-        element: <EditPage />,
-      },
-    ],
-  },
-]);
+import { router } from './configs/router';
+import './assets/styles/main.scss';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <StrictMode>

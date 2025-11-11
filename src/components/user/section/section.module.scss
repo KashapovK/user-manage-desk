@@ -1,0 +1,27 @@
+.title {
+  margin-block: fluid(40, 32) fluid(28, 16);
+  border-bottom: var(--border);
+  padding-bottom: rem(16);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: fluid(32, 20) fluid(40, 20);
+
+  @include mediaLaptop {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @include mediaMobile {
+    gap: rem(20);
+  }
+}
+
+.gridItem {
+  grid-column: span 4;
+
+  @include mediaLaptop {
+    grid-column: span 2;
+  }
+}

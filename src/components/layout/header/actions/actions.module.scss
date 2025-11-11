@@ -1,0 +1,12 @@
+.icons {
+  display: flex;
+  gap: fluid(4, 2);
+
+  @include mediaMobile {
+    display: none;
+  }
+}
+
+.iconsItem {
+  @include square(fluid(24, 24));
+}

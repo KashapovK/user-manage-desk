@@ -1,0 +1,22 @@
+@use '../helpers' as *;
+
+a,
+button,
+label,
+input,
+textarea,
+select,
+svg * {
+  transition: var(--transition);
+}
+
+button:hover,
+a:hover {
+  opacity: 0.7;
+}
+
+button:disabled,
+input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

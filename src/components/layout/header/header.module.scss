@@ -1,0 +1,21 @@
+.header {
+  background-color: var(--color-6);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  @include flex-center;
+}
+
+.headerContainer {
+  @include flex-align-center;
+  justify-content: space-between;
+  height: fluid(56, 50);
+  padding-inline: fluid(10, 16);
+  width: 100%;
+  max-width: fluid(1160, 343);
+}
+
+.headerRight {
+  display: flex;
+  gap: fluid(20, 16);
+}
